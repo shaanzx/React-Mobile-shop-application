@@ -19,8 +19,8 @@ export const Home = () => {
     useEffect(() =>{
         const fetchData = async () =>{
             try{
-                const response = await fetch('./product-data.json')
-                const jsonData = await response.json();
+/*                const response = await fetch('./product-data.json')
+                const jsonData = await response.json();*/
                 // console.log(jsonData);
                 setProducts(jsonData);
             }catch (error){
