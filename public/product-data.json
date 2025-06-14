@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Iphone 12",
+    "price": 999.99,
+    "currency": "USD",
+    "color": "Light Blue",
+    "ram": "8gb",
+    "storage": "256gb",
+    "image": "IPhone12.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Iphone 12 Pro",
+    "price": 1499.99,
+    "currency": "USD",
+    "color": "Space Gray",
+    "ram": "8gb",
+    "storage": "256gb",
+    "image": "12pro.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Iphone 12 Pro Max",
+    "price": 1999.99,
+    "currency": "USD",
+    "color": "Gold",
+    "ram": "8gb",
+    "storage": "256gb",
+    "image": "iphone-12-pro-max-gold.jpg"
+  }
+]

@@ -1,0 +1,11 @@
+.mainContent {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 20px);
+    height: 70vh;
+    overflow: hidden;
+    padding: 10px;
+    background-color:white;
+    color: black;
+    overflow-y: auto;
+}
