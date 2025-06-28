@@ -1,11 +1,13 @@
-import type { CartItem } from "../../../model/CartItem.ts";
 
-interface shoppingCartProps {
-    itemsList: CartItem[];
-}
+import {useSelector} from "react-redux";
+import type {RootState} from "../../../store/store.ts";
 
-export function ShoppingCart({ itemsList }: shoppingCartProps) {
+export function ShoppingCart() {
+
+    const {items} = useSelector((state:RootState) => state.carts);
+/*
     const subtotal = itemsList.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
+*/
 
     return (
         <div className="w-[calc(100%-200px)] mx-auto px-4 py-8">
@@ -34,7 +36,7 @@ export function ShoppingCart({ itemsList }: shoppingCartProps) {
                         </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-blue-200">
-                        {itemsList.length === 0 ? (
+                        {items.length === 0 ? (
                             <tr>
                                 <td colSpan={5} className="px-6 py-12 text-center">
                                     <div className="flex flex-col items-center justify-center">
@@ -46,7 +48,7 @@ export function ShoppingCart({ itemsList }: shoppingCartProps) {
                                 </td>
                             </tr>
                         ) : (
-                            itemsList.map((item) => (
+                            items.map((item) => (
                                 <tr key={item.product.id} className="hover:bg-blue-50 transition-colors">
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         <div className="text-sm font-medium text-blue-900">{item.product.name}</div>
@@ -87,13 +89,13 @@ export function ShoppingCart({ itemsList }: shoppingCartProps) {
                     </table>
                 </div>
 
-                {itemsList.length > 0 && (
+                {items.length > 0 && (
                     <div className="border-t border-gray-200 px-6 py-4 bg-gray-50">
                         <div className="flex justify-end">
                             <div className="w-64">
                                 <div className="flex justify-between text-lg font-medium text-gray-900 mb-4">
                                     <span>Subtotal:</span>
-                                    <span>${subtotal.toFixed(2)}</span>
+                                    <span>${items.reduce((total, item) => total + item.product.price * item.quantity, 0).toFixed(2)}</span>
                                 </div>
                                 <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors font-medium">
                                     Checkout
@@ -104,7 +106,7 @@ export function ShoppingCart({ itemsList }: shoppingCartProps) {
                 )}
             </div>
 
-            {itemsList.length > 0 && (
+            {items.length > 0 && (
                 <div className="mt-4 text-center">
                     <a href="/" className="text-blue-600 hover:text-blue-800 text-sm inline-flex items-center">
                         <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

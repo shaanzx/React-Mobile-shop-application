@@ -1,9 +1,12 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCartShopping} from "@fortawesome/free-solid-svg-icons";
-import {useState} from "react";
 import {ModifyCart} from "../ModifyCart/ModifyCart.tsx";
+import type {ProductData} from "../../../model/ProductData.ts";
+import {addItemToCart} from "../../../slices/cartSlice.ts";
+import {useDispatch, useSelector} from "react-redux";
+import type {AppDispatch, RootState} from "../../../store/store.ts";
 
-type ProductData = {
+/*type ProductData = {
     id: number;
     name: string;
     price: number;
@@ -12,22 +15,24 @@ type ProductData = {
     ram: string;
     storage: string;
     image: string;
-}
+}*/
 
 type ProductProps = {
     data: ProductData;
 }
 
-
 export function Product({data}: ProductProps) {
+    const dispatch = useDispatch<AppDispatch>()
+    const item = useSelector((state : RootState) => state.carts.items.find(cartItem => cartItem.product.id === data.id));
+
     const images: Record<string, string> = import.meta.glob('../../../assets/products/*', {
         eager: true,
         import: 'default'
     });
 
-    const [isActive, setActive] = useState(false);
     const addToCart = () => {
-        setActive(!isActive);//true
+        dispatch(addItemToCart(data))
+       // setActive(!isActive);//true
     }
     return (
         <div
@@ -52,7 +57,7 @@ export function Product({data}: ProductProps) {
             </div>
             <div className="flex justify-center items-center">
                 {
-                    isActive ? (
+                    item ? (
                         <ModifyCart data={{product:data}}/>
                     ) : (
                         <button
