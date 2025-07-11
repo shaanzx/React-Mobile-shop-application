@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import {submitContactForm} from "../../../slices/contactSlice.ts";
 
 export function Contact() {
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
@@ -9,14 +10,21 @@ export function Contact() {
         message: string;
     }
 
-    const clearForm = () => {
-        window.location.reload();
-    }
+    // const clearForm = () => {
+    //     window.location.reload();
+    // }
 
-    const onSubmit = (data: FormData) => {
-        console.log('Form submitted:', data);
+    const onSubmit = async (data: FormData) => {
+        /*console.log('Form submitted:', data);
         alert(`Submitted your case : ${data.subject}`);
-        clearForm();
+        clearForm();*/
+        try{
+            await submitContactForm(data);
+            alert("Your message has been sent successfully!");
+            window.location.reload();
+        } catch (error) {
+            console.error("Error sending contact form:", error);
+        }
     }
 
     return (

@@ -28,7 +28,7 @@ export const Home = () => {
         <div>
             <div className="flex flex-wrap h-screen ml-[1px] mt-5 mb-5 justify-center items-center mx-auto gap-15">
                 {
-                    list.map((product) => (
+                    /*Array.isArray(list) &&*/ list.map((product) => (
                         <Product key={product.id} data={product}/>
                     ))
                 }
