@@ -1,4 +1,5 @@
 import {jwtDecode} from "jwt-decode";
+import type {UserData} from "../model/userData.ts";
 
 export const isTokenExpired = (token : string) => {
     try {
@@ -12,3 +13,7 @@ export const isTokenExpired = (token : string) => {
         return true;
     }
 }
+
+export const getUserFromToken = (token :string) => {
+    return jwtDecode<UserData>(token)
+;}
